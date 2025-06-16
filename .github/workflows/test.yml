@@ -10,31 +10,26 @@ env:
 
 jobs:
   check:
-    name: Foundry project
+    name: Foundry Project CI
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: 📦 Checkout Repo
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Install Foundry
+      - name: 🛠 Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
 
-      - name: Show Forge version
-        run: |
-          forge --version
+      - name: 🔍 Show Forge Version
+        run: forge --version
 
-      - name: Run Forge fmt
-        run: |
-          forge fmt --check
-        id: fmt
+      - name: 🎯 Run forge fmt --check
+        run: forge fmt --check
 
-      - name: Run Forge build
-        run: |
-          forge build --sizes
-        id: build
+      - name: ⚙️ Build Contracts
+        run: forge build --sizes
 
-      - name: Run Forge tests
-        run: |
-          forge test -vvv
-        id: test
+      - name: 🧪 Run Tests
+        run: forge test -vvv
